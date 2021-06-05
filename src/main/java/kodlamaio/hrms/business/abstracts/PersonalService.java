@@ -2,14 +2,16 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Personal;
 
 public interface PersonalService {
 
-	void add();
-	void update();
-	void delete();
+	Result add(Personal personal);
+	Result update(Personal personal);
+	Result delete(Personal personal);
 	
-	List<Personal> getAll();
-	Personal get(int id);
+	DataResult<List<Personal>> getAll();
+	DataResult<Personal> get(int id);
 }

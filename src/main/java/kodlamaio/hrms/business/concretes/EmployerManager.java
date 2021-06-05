@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 
@@ -20,33 +24,34 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public void add() {
+	public Result add(Employer employer) {
 		// TODO Auto-generated method stub
-		
+		this.employerDao.save(employer);
+		return new SuccessResult();
 	}
 
 	@Override
-	public void update() {
+	public Result update(Employer employer) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult();
 	}
 
 	@Override
-	public void delete() {
+	public Result delete(Employer employer) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult();
 	}
 
 	@Override
-	public List<Employer> getAll() {
+	public DataResult<List<Employer>> getAll() {
 		// TODO Auto-generated method stub
-		return employerDao.findAll();
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll());
 	}
 
 	@Override
-	public Employer get(int id) {
+	public DataResult<Employer> get(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<Employer>(this.employerDao.findById(id).get());
 	}
 
 }

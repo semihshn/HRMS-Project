@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.PersonalService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.PersonalDao;
 import kodlamaio.hrms.entities.concretes.Personal;
 
@@ -18,33 +22,34 @@ public class PersonalManager implements PersonalService{
 	}
 
 	@Override
-	public void add() {
+	public Result add(Personal personal) {
 		// TODO Auto-generated method stub
-		
+		this.personalDao.save(personal);
+		return new SuccessResult("Personel eklendi");
 	}
 
 	@Override
-	public void update() {
+	public Result update(Personal personal) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult("Personel eklendi");
 	}
 
 	@Override
-	public void delete() {
+	public Result delete(Personal personal) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult("Personel eklendi");
 	}
 
 	@Override
-	public List<Personal> getAll() {
+	public DataResult<List<Personal>> getAll() {
 		// TODO Auto-generated method stub
-		return personalDao.findAll();
+		return new SuccessDataResult<List<Personal>>(personalDao.findAll());
 	}
 
 	@Override
-	public Personal get(int id) {
+	public DataResult<Personal> get(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<Personal>(this.personalDao.findById(id).get());
 	}
 
 }

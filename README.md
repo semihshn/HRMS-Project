@@ -26,7 +26,7 @@
 
 <h2 align="center">Model</h2>
 
-<img src="./ReadmeImage/Diagram.PNG">
+<img align="center" src="./ReadmeImage/Diagram.PNG">
 
 </p>
 

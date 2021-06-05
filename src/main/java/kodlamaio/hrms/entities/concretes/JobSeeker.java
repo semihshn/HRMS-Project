@@ -3,20 +3,28 @@ package kodlamaio.hrms.entities.concretes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name="jobseekers")
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobSeeker {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int userId;
+	
+	@Column(name="jobid")
+	private int jobId;
 	
 	@Column(name="firstname")
 	private String firstName;
@@ -30,28 +38,9 @@ public class JobSeeker {
 	@Column(name="yearofbirth")
 	private String yearOfBirth;
 	
-	@Column(name="jobid")
-	private int jobId;
-	
 	@Column(name="verifiedbysystem")
 	private boolean verifiedBySystem;
 	
 	@Column(name="status")
 	private boolean status;
-	
-	public JobSeeker() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public JobSeeker(int userId, String firstName, String lastName, char nationalityId, String yearOfBirth, int jobId,
-			boolean verifiedBySystem, boolean status) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.nationalityId = nationalityId;
-		this.yearOfBirth = yearOfBirth;
-		this.jobId = jobId;
-		this.verifiedBySystem = verifiedBySystem;
-		this.status = status;
-	}
 }

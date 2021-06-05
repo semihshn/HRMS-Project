@@ -2,13 +2,15 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Job;
 
 public interface JobService {
-	void add();
-	void update();
-	void delete();
+	Result add(Job job);
+	Result update(Job job);
+	Result delete(Job job);
 	
-	List<Job> getAll();
-	Job get(int id);
+	DataResult<List<Job>> getAll();
+	DataResult<Job> get(int id);
 }

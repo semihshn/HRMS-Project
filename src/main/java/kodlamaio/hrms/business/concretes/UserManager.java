@@ -3,6 +3,10 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
 
@@ -16,33 +20,34 @@ public class UserManager implements UserService{
 	}
 
 	@Override
-	public void add() {
+	public Result add(User user) {
 		// TODO Auto-generated method stub
-		
+		this.userDao.save(user);
+		return new SuccessResult("Kullanıcı eklendi");
 	}
 
 	@Override
-	public void update() {
+	public Result update(User user) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult("Kullanıcı eklendi");
 	}
 
 	@Override
-	public void delete() {
+	public Result delete(User user) {
 		// TODO Auto-generated method stub
-		
+		return new SuccessResult("Kullanıcı eklendi");
 	}
 
 	@Override
-	public List<User> getAll() {
+	public DataResult<List<User>> getAll() {
 		// TODO Auto-generated method stub
-		return userDao.findAll();
+		return new SuccessDataResult<List<User>>(userDao.findAll());
 	}
 
 	@Override
-	public User get(int id) {
+	public DataResult<User> get(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<User>(this.userDao.findById(id).get());
 	}
 
 }
