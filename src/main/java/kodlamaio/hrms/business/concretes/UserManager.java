@@ -2,6 +2,8 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
@@ -10,6 +12,7 @@ import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
 
+@Service
 public class UserManager implements UserService{
 
 	private UserDao userDao;
@@ -35,7 +38,7 @@ public class UserManager implements UserService{
 	@Override
 	public Result delete(User user) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("Kullanıcı eklendi");
+		return new SuccessResult("Kullanıcı silindi");
 	}
 
 	@Override

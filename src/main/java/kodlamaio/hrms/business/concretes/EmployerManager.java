@@ -27,19 +27,19 @@ public class EmployerManager implements EmployerService{
 	public Result add(Employer employer) {
 		// TODO Auto-generated method stub
 		this.employerDao.save(employer);
-		return new SuccessResult();
+		return new SuccessResult("İşveren kaydı eklendi");
 	}
 
 	@Override
 	public Result update(Employer employer) {
 		// TODO Auto-generated method stub
-		return new SuccessResult();
+		return new SuccessResult("İşveren kaydı güncellendi");
 	}
 
 	@Override
 	public Result delete(Employer employer) {
 		// TODO Auto-generated method stub
-		return new SuccessResult();
+		return new SuccessResult("İşveren kaydı silindi");
 	}
 
 	@Override

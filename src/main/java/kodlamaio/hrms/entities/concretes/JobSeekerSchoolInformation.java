@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,28 +18,24 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="personals")
+@Table(name="jobseeker_contact_informations")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Personal {
-	
+public class JobSeekerSchoolInformation {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="first_name")
-	private String firstName;
+	@Column(name="university_start_date")
+	private Date universityStartDate;
 	
-	@Column(name="last_name")
-	private String lastName;
-	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="university_graduation_date")
+	private Date universityGraduationDate;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-	
+    @JoinColumn(name = "jobseeker_id", referencedColumnName = "id")
+    private JobSeeker jobSeeker;
+
 }

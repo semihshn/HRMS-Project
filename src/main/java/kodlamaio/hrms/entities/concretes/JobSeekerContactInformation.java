@@ -16,28 +16,31 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="personals")
+@Table(name="jobseeker_contact_informations")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Personal {
-	
+public class JobSeekerContactInformation {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="first_name")
-	private String firstName;
+	@Column(name="linkedin_adress")
+	private String linkedinAdress;
 	
-	@Column(name="last_name")
-	private String lastName;
+	@Column(name="about")
+	private String about;
 	
 	@Column(name="status")
 	private boolean status;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "jobseeker_id", referencedColumnName = "id")
+    private JobSeeker jobSeeker;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school_id", referencedColumnName = "id")
+    private School school;
+
 }
