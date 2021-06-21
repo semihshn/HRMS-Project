@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.concretes;
+package kodlamaio.hrms.core.entities;
 
 import java.util.List;
 
@@ -13,6 +13,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import kodlamaio.hrms.entities.concretes.EmailActivation;
+import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.concretes.MernisActivation;
+import kodlamaio.hrms.entities.concretes.Personal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

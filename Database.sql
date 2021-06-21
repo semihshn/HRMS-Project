@@ -25,7 +25,7 @@ create table IF NOT EXISTS schools(
 	name varchar(50) NOT NULL
 );
 
-create table IF NOT EXISTS school_part( 
+create table IF NOT EXISTS school_parts( 
 	id SERIAL NOT NULL,
 	school_id integer NOT NULL, 
 	name varchar(50) NOT NULL,
@@ -51,35 +51,44 @@ create table IF NOT EXISTS job_seekers(
 	last_name varchar(20) NOT NULL, 
 	nationality_id char(11) NOT NULL, 
 	year_of_birth varchar(10) NOT NULL, 
-	github_adress varchar(100) NOT NULL, 
-	linkedin_adress varchar(100) NOT NULL, 
-	about varchar(200) NOT NULL, 
 	status boolean DEFAULT false,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_users FOREIGN KEY(user_id) REFERENCES users(id),
 	CONSTRAINT fk_job_wanted FOREIGN KEY(job_wanted_id) REFERENCES jobs(id)
 ); 
 
-create table IF NOT EXISTS jobseekers_school_information( 
+create table IF NOT EXISTS jobseeker_contact_informations( 
+	id SERIAL NOT NULL, 
+	jobseeker_id integer NOT NULL, 
+	linkedin_adress varchar(100) NOT NULL, 
+	about varchar(200) NOT NULL, 
+	status boolean DEFAULT false,
+	PRIMARY KEY(id),
+	CONSTRAINT fk_job_seekers FOREIGN KEY(jobseeker_id) REFERENCES job_seekers(id)
+);
+
+
+
+create table IF NOT EXISTS jobseeker_school_informations( 
 	id SERIAL NOT NULL,
 	school_id integer NOT NULL, 
-	jobseekers_id integer NOT NULL, 
+	jobseeker_id integer NOT NULL, 
 	university_start_date date NOT NULL,
 	university_graduation_date date,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_schools FOREIGN KEY(school_id) REFERENCES schools(id),
-	CONSTRAINT fk_job_seekers FOREIGN KEY(jobseekers_id) REFERENCES job_seekers(id)
+	CONSTRAINT fk_job_seekers FOREIGN KEY(jobseeker_id) REFERENCES job_seekers(id)
 );
 
-create table IF NOT EXISTS Job_experience( 
+create table IF NOT EXISTS job_experiences( 
 	id SERIAL NOT NULL,
-	job_seekers_id integer NOT NULL, 
+	job_seeker_id integer NOT NULL, 
 	job_id integer NOT NULL, 
 	company_name varchar(50) NOT NULL,
 	start_date date NOT NULL,
 	end_date date,
 	PRIMARY KEY(id),
-	CONSTRAINT fk_job_seekers FOREIGN KEY(job_seekers_id) REFERENCES job_seekers(id),
+	CONSTRAINT fk_job_seekers FOREIGN KEY(job_seeker_id) REFERENCES job_seekers(id),
 	CONSTRAINT fk_jobs FOREIGN KEY(job_id) REFERENCES jobs(id)
 );
 
@@ -117,8 +126,8 @@ CREATE TABLE IF NOT EXISTS email_activations
 (
 	id SERIAL NOT NULL,
 	user_id integer NOT NULL, 
-    activation_code character varying(200) NOT NULL,
-    email character varying(100) NOT NULL,
+    	activation_code character varying(200) NOT NULL,
+	is_activated bool NOT NULL default false,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_users FOREIGN KEY(user_id) REFERENCES users(id)
 );
@@ -142,18 +151,18 @@ CREATE TABLE IF NOT EXISTS cities
 CREATE TABLE IF NOT EXISTS job_adverts
 (
     id SERIAL NOT NULL,
-    employers_id integer NOT NULL,
+    employer_id integer NOT NULL,
     job_position_id integer NOT NULL,
     city_id integer NOT NULL,
     description character varying NOT NULL,
     min_salary integer,
     max_salary integer,
-    number_of_open_positions integer NOT NULL,
+    number_of_open_position integer NOT NULL,
     created_at timestamp with time zone NOT NULL,
     application_deadline timestamp with time zone,
 	is_active boolean NOT NULL,
 	PRIMARY KEY(id),
-	CONSTRAINT fk_employers FOREIGN KEY(employers_id) REFERENCES employers(id),
+	CONSTRAINT fk_employers FOREIGN KEY(employer_id) REFERENCES employers(id),
 	CONSTRAINT fk_jobs FOREIGN KEY(job_position_id) REFERENCES jobs(id),
 	CONSTRAINT fk_cities FOREIGN KEY(city_id) REFERENCES cities(id)
 );
