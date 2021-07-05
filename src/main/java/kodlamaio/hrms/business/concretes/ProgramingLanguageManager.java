@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ProgramingLanguageService;
@@ -17,6 +18,7 @@ public class ProgramingLanguageManager implements ProgramingLanguageService{
 
 	private ProgramingLanguageDao programingLanguageDao;
 	
+	@Autowired
 	public ProgramingLanguageManager(ProgramingLanguageDao programingLanguageDao) {
 		this.programingLanguageDao = programingLanguageDao;
 	}
@@ -47,7 +49,7 @@ public class ProgramingLanguageManager implements ProgramingLanguageService{
 	}
 
 	@Override
-	public DataResult<ProgramingLanguage> get(int id) {
+	public DataResult<ProgramingLanguage> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<ProgramingLanguage>(this.programingLanguageDao.findById(id).get());
 	}

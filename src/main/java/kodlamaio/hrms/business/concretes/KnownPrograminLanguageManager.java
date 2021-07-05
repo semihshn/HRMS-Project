@@ -49,7 +49,7 @@ public class KnownPrograminLanguageManager implements KnownProgramingLanguageSer
 	}
 
 	@Override
-	public DataResult<KnownProgramingLanguage> get(int id) {
+	public DataResult<KnownProgramingLanguage> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<KnownProgramingLanguage>(this.knownProgramingLanguageDao.findById(id).get());
 	}

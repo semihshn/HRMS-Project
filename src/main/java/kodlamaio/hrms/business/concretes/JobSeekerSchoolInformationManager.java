@@ -49,7 +49,7 @@ public class JobSeekerSchoolInformationManager implements JobSeekerSchoolInforma
 	}
 
 	@Override
-	public DataResult<JobSeekerSchoolInformation> get(int id) {
+	public DataResult<JobSeekerSchoolInformation> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<JobSeekerSchoolInformation>(this.jobSeekerSchoolInformationDao.findById(id).get());
 	}

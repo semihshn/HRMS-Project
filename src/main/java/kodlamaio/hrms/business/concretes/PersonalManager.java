@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.PersonalService;
@@ -17,6 +18,7 @@ public class PersonalManager implements PersonalService{
 
 	private PersonalDao personalDao;
 	
+	@Autowired
 	public PersonalManager(PersonalDao personalDao) {
 		this.personalDao = personalDao;
 	}
@@ -47,7 +49,7 @@ public class PersonalManager implements PersonalService{
 	}
 
 	@Override
-	public DataResult<Personal> get(int id) {
+	public DataResult<Personal> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<Personal>(this.personalDao.findById(id).get());
 	}

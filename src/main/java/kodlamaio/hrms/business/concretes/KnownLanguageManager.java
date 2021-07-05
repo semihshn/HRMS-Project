@@ -49,7 +49,7 @@ public class KnownLanguageManager implements KnownLanguageService{
 	}
 
 	@Override
-	public DataResult<KnownLanguage> get(int id) {
+	public DataResult<KnownLanguage> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<KnownLanguage>(this.knownLanguageDao.findById(id).get());
 	}

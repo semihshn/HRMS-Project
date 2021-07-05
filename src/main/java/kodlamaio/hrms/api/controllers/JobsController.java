@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,11 @@ public class JobsController {
 	@PostMapping("/add")
 	public Result add(@RequestBody Job job) {
 		return this.jobService.add(job);
+	}
+	
+	@DeleteMapping("/delete")
+	public Result delete(@RequestBody Job job) {
+		return this.jobService.delete(job);
 	}
 	
 }

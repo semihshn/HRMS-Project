@@ -1,6 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,10 +29,10 @@ public class JobSeekerSchoolInformation {
 	private int id;
 	
 	@Column(name="university_start_date")
-	private Date universityStartDate;
+	private LocalDateTime universityStartDate;
 	
 	@Column(name="university_graduation_date")
-	private Date universityGraduationDate;
+	private LocalDateTime universityGraduationDate;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "jobseeker_id", referencedColumnName = "id")

@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
+import kodlamaio.hrms.business.constants.Messages;
+import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
@@ -25,9 +28,17 @@ public class JobManager implements JobService{
 
 	@Override
 	public Result add(Job job) {
-		// TODO Auto-generated method stub
+		Result result=BusinessRules.run(
+				this.checkIfJobPositionExist(job)
+						);
+
+		if (!result.isSuccess()) {
+		return result;
+		}
+		
 		this.jobDao.save(job);
 		return new SuccessResult("İş dalı eklendi");
+
 	}
 
 	@Override
@@ -40,6 +51,7 @@ public class JobManager implements JobService{
 	@Override
 	public Result delete(Job job) {
 		// TODO Auto-generated method stub
+		jobDao.delete(job);
 		return new SuccessResult("İş dalı silindi");
 		
 	}
@@ -51,9 +63,14 @@ public class JobManager implements JobService{
 	}
 
 	@Override
-	public DataResult<Job> get(int id) {
+	public DataResult<Job> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<Job>(this.jobDao.findById(id).get());
 	}
+	
+    public Result checkIfJobPositionExist(Job job) {
+        return jobDao.findByJobName(job.getJobName()).isEmpty() ? new SuccessResult()
+                : new ErrorResult(Messages.jobPositionWithTitleAlreadyExits);
+    }
 
 }

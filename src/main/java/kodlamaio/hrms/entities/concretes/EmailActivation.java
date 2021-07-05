@@ -10,14 +10,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import kodlamaio.hrms.core.entities.User;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
 @Table(name="email_activations")
-@AllArgsConstructor
 @NoArgsConstructor
 public class EmailActivation {
 	
@@ -35,4 +38,18 @@ public class EmailActivation {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@Builder
+	public EmailActivation(@NotNull final User user, @NotBlank @Size(max = 200) final String activationCode,
+			@NotNull final boolean isActivated) {
+		this.user = user;
+		this.activationCode = activationCode;
+		this.isActivated = isActivated;
+	}
+
+	@Builder
+	public EmailActivation(@NotNull final User user, @NotBlank @Size(max = 200) final String activationCode) {
+		this.user = user;
+		this.activationCode = activationCode;
+	}
 }

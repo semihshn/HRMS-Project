@@ -1,18 +1,11 @@
 package kodlamaio.hrms.business.abstracts;
 
-import java.util.List;
-
-import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.business.adapters.mernisService.PersonForValidateFromMernisService;
+import kodlamaio.hrms.core.business.BaseService;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.MernisActivation;
 
-public interface MernisActivationService {
+public interface MernisActivationService extends BaseService<MernisActivation,Integer>{
+	Result check(PersonForValidateFromMernisService personForValidateFromMernisService);
 	
-	Result add(MernisActivation mernisActivation);
-	Result update(MernisActivation mernisActivation);
-	Result delete(MernisActivation mernisActivation);
-	
-	DataResult<List<MernisActivation>> getAll();
-	DataResult<MernisActivation> get(int id);
-
 }

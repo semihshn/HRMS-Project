@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,5 +35,8 @@ public class City {
 	
 	@OneToMany(mappedBy="city")
 	private List<JobAdvert> jobAdverts;
+	
+	/*@OneToOne(mappedBy = "city")
+    private JobAdvert jobAdvert;*/
 
 }

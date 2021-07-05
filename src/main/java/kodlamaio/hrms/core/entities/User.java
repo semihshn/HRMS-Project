@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Table(name="users")
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","emailActivations","mernisActivations"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","emailActivations","mernisActivations","employer","jobSeeker","personal"})
 public class User {
 	
 	@Id
@@ -47,13 +47,15 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<MernisActivation> mernisActivations;
 	
-    @OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user")
     private Employer employer;
-    
-    @OneToOne(mappedBy = "user")
+	
+	@OneToOne(mappedBy = "user")
     private JobSeeker jobSeeker;
-    
-    @OneToOne(mappedBy = "user")
+	
+	@OneToOne(mappedBy = "user")
     private Personal personal;
+	
+	
 	
 }

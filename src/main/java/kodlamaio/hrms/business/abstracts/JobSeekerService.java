@@ -1,17 +1,11 @@
 package kodlamaio.hrms.business.abstracts;
 
-import java.util.List;
-
-import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.business.BaseService;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 
-public interface JobSeekerService {
+public interface JobSeekerService extends BaseService<JobSeeker,Integer>{
 	
-	Result add(JobSeeker jobSeeker);
-	Result update(JobSeeker jobSeeker);
-	Result delete(JobSeeker jobSeeker);
+	Result checkIfNationalIdExist(String identityNumber);
 	
-	DataResult<List<JobSeeker>> getAll();
-	DataResult<JobSeeker> get(int id);
 }

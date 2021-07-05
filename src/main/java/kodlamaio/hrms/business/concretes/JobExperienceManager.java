@@ -49,7 +49,7 @@ public class JobExperienceManager implements JobExperienceService{
 	}
 
 	@Override
-	public DataResult<JobExperience> get(int id) {
+	public DataResult<JobExperience> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<JobExperience>(this.jobExperienceDao.findById(id).get());
 	}

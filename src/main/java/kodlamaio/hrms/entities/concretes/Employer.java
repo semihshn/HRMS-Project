@@ -31,7 +31,7 @@ public class Employer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int userId;
+	private int id;
 	
 	@Column(name="company_name")
 	private String companyName;
@@ -45,8 +45,11 @@ public class Employer {
 	@Column(name="status")
 	private boolean status;
 	
-	@OneToMany(mappedBy="employer")
+	@OneToMany(mappedBy="employer",targetEntity = JobAdvert.class)
 	private List<JobAdvert> jobAdverts;
+	
+	/*@OneToOne(mappedBy = "employer")
+    private JobAdvert jobAdvert;*/
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

@@ -49,7 +49,7 @@ public class JobSeekerContactInformationManager implements JobSeekerContactInfor
 	}
 
 	@Override
-	public DataResult<JobSeekerContactInformation> get(int id) {
+	public DataResult<JobSeekerContactInformation> getById(Integer id) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<JobSeekerContactInformation>(this.jobSeekerContactInformationDao.findById(id).get());
 	}
