@@ -60,7 +60,8 @@ create table IF NOT EXISTS job_seekers(
 create table IF NOT EXISTS jobseeker_contact_informations( 
 	id SERIAL NOT NULL, 
 	jobseeker_id integer NOT NULL, 
-	linkedin_adress varchar(100) NOT NULL, 
+	linkedin_adress varchar(100) NOT NULL,
+	github_adress varchar(100) NOT NULL, 
 	about varchar(200) NOT NULL, 
 	status boolean DEFAULT false,
 	PRIMARY KEY(id),
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS mernis_activations
 (
 	id SERIAL NOT NULL,
 	user_id integer NOT NULL, 
-    is_approved boolean NOT NULL,
+        is_approved boolean NOT NULL,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_users FOREIGN KEY(user_id) REFERENCES users(id)
 );
@@ -145,6 +146,15 @@ CREATE TABLE IF NOT EXISTS cities
 (
     id SERIAL PRIMARY KEY NOT NULL,
     name character varying(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS images
+(
+    id SERIAL NOT NULL,
+    user_id integer NOT NULL, 
+    image_link character varying(200) NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT fk_users FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 

@@ -28,19 +28,20 @@ public class CityManager implements CityService{
 	public Result add(City city) {
 		// TODO Auto-generated method stub
 		this.cityDao.save(city);
-		return new SuccessResult("E-mail eklendi");
+		return new SuccessResult("Şehir eklendi");
 	}
 
 	@Override
 	public Result update(City city) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("E-mail güncellendi");
+		return new SuccessResult("Şehir güncellendi");
 	}
 
 	@Override
 	public Result delete(City city) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("E-mail silindi");
+		this.cityDao.delete(city);
+		return new SuccessResult("Şehir silindi");
 	}
 
 	@Override

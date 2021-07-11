@@ -9,15 +9,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="school_part")
+@Table(name="school_parts")
 @AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","school"})
 public class SchoolPart {
 	
 	@Id
@@ -26,7 +31,7 @@ public class SchoolPart {
 	private int id;
 	
 	@Column(name="name")
-	private String name;
+	private String schoolPartName;
 	
 	@ManyToOne
 	@JoinColumn(name="school_id")

@@ -1,9 +1,11 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import kodlamaio.hrms.business.abstracts.EmailActivationService;
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
@@ -18,7 +20,8 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
-
+import kodlamaio.hrms.entities.dtos.JobSeekerCvDto;
+import kodlamaio.hrms.entities.dtos.converter.Converter;
 @Service
 public class JobSeekerManager implements JobSeekerService{
 
@@ -26,11 +29,13 @@ public class JobSeekerManager implements JobSeekerService{
 	private UserService userService;
 	private EmailActivationService emailActivationService;
 	private MernisActivationService mernisActivationService;
+	private Converter converter;
 	
 	@Autowired
 	public JobSeekerManager(JobSeekerDao jobSeekerDao,UserService userService
 							,MernisActivationService mernisActivationService
-							,EmailActivationService emailActivationService
+							,EmailActivationService emailActivationService,
+							 Converter converter
 							) 
 	{
 		
@@ -38,6 +43,7 @@ public class JobSeekerManager implements JobSeekerService{
 		this.userService=userService;
 		this.mernisActivationService=mernisActivationService;
 		this.emailActivationService=emailActivationService;
+		this.converter=converter;
 	}
 
 	@Override
@@ -94,5 +100,32 @@ public class JobSeekerManager implements JobSeekerService{
 		return emailActivationService.check(email).isSuccess() ? new SuccessResult()
 				: new ErrorResult();
 	}
+
+	/*@Override
+	public DataResult<List<Job>> getJobSeekerCvDetails() {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<Job>>(this.jobSeekerDao.getJobSeekerCvDetails());
+	}*/
+
+	@Override
+	public DataResult<List<JobSeekerCvDto>> getAllCv() {
+		
+		return new SuccessDataResult<List<JobSeekerCvDto>>(this.jobSeekerDao.findAll()
+				.stream()
+				.map(converter::convertToCv)
+				.collect(Collectors.toList()),"Tüm kullanıcıların Cv bilgisi başarılı şekilde getirildi");
+				
+	}
+
+	@Override
+	public DataResult<List<JobSeekerCvDto>> getAllCvByJobSeeker_Id(int jobSeekerId) {
+		
+		return new SuccessDataResult<List<JobSeekerCvDto>>(this.jobSeekerDao.findById(jobSeekerId)
+				.stream()
+				.map(converter::convertToCv)
+				.collect(Collectors.toList()),"Seçmiş olduğunuz iş arayanın Cv bilgisi başarılı şekilde getirildi");
+	}
+
+	
 
 }

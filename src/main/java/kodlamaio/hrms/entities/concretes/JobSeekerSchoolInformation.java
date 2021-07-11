@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="jobseeker_contact_informations")
+@Table(name="jobseeker_school_informations")
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobSeekerSchoolInformation {
@@ -34,8 +35,12 @@ public class JobSeekerSchoolInformation {
 	@Column(name="university_graduation_date")
 	private LocalDateTime universityGraduationDate;
 	
+	@ManyToOne
+	@JoinColumn(name="jobseeker_id")
+	private JobSeeker jobSeeker;
+	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "jobseeker_id", referencedColumnName = "id")
-    private JobSeeker jobSeeker;
+    @JoinColumn(name = "school_id", referencedColumnName = "id")
+    private School school;
 
 }

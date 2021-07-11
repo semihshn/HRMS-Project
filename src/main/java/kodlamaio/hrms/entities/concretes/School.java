@@ -27,7 +27,7 @@ public class School {
 	private int id;
 	
 	@Column(name="name")
-	private String name;
+	private String schoolName;
 	
 	@OneToMany(mappedBy  = "school")
 	private List<SchoolPart> schoolPart;

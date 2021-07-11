@@ -11,10 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kodlamaio.hrms.entities.concretes.EmailActivation;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import kodlamaio.hrms.entities.concretes.MernisActivation;
 import kodlamaio.hrms.entities.concretes.Personal;
@@ -44,18 +46,8 @@ public class User {
 	@OneToMany(mappedBy  = "user")
 	private List<EmailActivation> emailActivations;
 	
-	@OneToMany(mappedBy="user")
-	private List<MernisActivation> mernisActivations;
-	
-	@OneToOne(mappedBy = "user")
-    private Employer employer;
-	
-	@OneToOne(mappedBy = "user")
-    private JobSeeker jobSeeker;
-	
-	@OneToOne(mappedBy = "user")
-    private Personal personal;
-	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy  = "user")
+	private List<Image> images;
 	
 }

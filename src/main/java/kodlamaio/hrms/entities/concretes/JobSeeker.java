@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,9 +25,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="job_seekers")
-@AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","knownLanguage","jobExperience","knownProgramingLanguage","job"})
+@AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobSeekerContactInformations","jobExperiences","knownLanguages","knownProgramingLanguages","jobSeekerSchoolInformations"})
 public class JobSeeker {
 	
 	@Id
@@ -51,26 +53,32 @@ public class JobSeeker {
 	/*@Column(name="job_wanted_id")
 	private int jobWantedId;*/
 	
-	@OneToMany(mappedBy  = "jobSeeker")
-	private List<KnownLanguage> knownLanguage;
-	
-	@OneToMany(mappedBy="jobSeeker")
-	private List<JobExperience> jobExperience;
-	
-	@OneToMany(mappedBy  = "jobSeeker")
-	private List<KnownProgramingLanguage> knownProgramingLanguage;
-	
-	@OneToOne()
-    @JoinColumn(name = "job_wanted_id", referencedColumnName = "id")
+	@ManyToOne()
+    @JoinColumn(name = "job_wanted_id")
     private Job job;
+	
+	/*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_wanted_id", referencedColumnName = "id")
+    private Job job;*/
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 	
     @OneToOne(mappedBy = "jobSeeker")
-    private JobSeekerContactInformation jobSeekerContactInformation;
+    private JobSeekerContactInformation jobSeekerContactInformations;
+	
+    @OneToMany(mappedBy="jobSeeker")
+    private List<JobExperience> jobExperiences;
     
-    @OneToOne(mappedBy = "jobSeeker")
-    private JobSeekerSchoolInformation jobSeekerSchoolInformation;
+    @OneToMany(mappedBy="jobSeeker")
+    private List<KnownLanguage> knownLanguages;
+    
+    @OneToMany(mappedBy="jobSeeker")
+    private List<KnownProgramingLanguage> knownProgramingLanguages;
+    
+    //@JsonIgnore
+    @OneToMany(mappedBy="jobSeeker")
+    private List<JobSeekerSchoolInformation> jobSeekerSchoolInformations;
+
 }

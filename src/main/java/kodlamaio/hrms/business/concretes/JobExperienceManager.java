@@ -39,13 +39,14 @@ public class JobExperienceManager implements JobExperienceService{
 	@Override
 	public Result delete(JobExperience jobExperience) {
 		// TODO Auto-generated method stub
+		this.jobExperienceDao.delete(jobExperience);
 		return new SuccessResult("İşveren kaydı silindi");
 	}
 
 	@Override
 	public DataResult<List<JobExperience>> getAll() {
 		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findAll());
+		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findAll(),"İş arayan tecrübeleri başarı ile getirildi");
 	}
 
 	@Override

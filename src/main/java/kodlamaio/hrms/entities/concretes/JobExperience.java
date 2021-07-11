@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="job_experience")
+@Table(name="job_experiences")
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobExperience {
@@ -31,10 +31,10 @@ public class JobExperience {
 	private String companyName;
 	
 	@Column(name="start_date")
-	private LocalDateTime startDate;
+	private LocalDateTime experienceStartDate;
 	
 	@Column(name="end_date")
-	private LocalDateTime endDate;
+	private LocalDateTime experienceEndDate;
 	
 	@ManyToOne
 	@JoinColumn(name="job_seeker_id")
