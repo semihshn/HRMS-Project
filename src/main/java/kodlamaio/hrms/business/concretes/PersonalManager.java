@@ -33,12 +33,14 @@ public class PersonalManager implements PersonalService{
 	@Override
 	public Result update(Personal personal) {
 		// TODO Auto-generated method stub
+		this.personalDao.save(personal);
 		return new SuccessResult("Personel eklendi");
 	}
 
 	@Override
 	public Result delete(Personal personal) {
 		// TODO Auto-generated method stub
+		this.personalDao.delete(personal);
 		return new SuccessResult("Personel eklendi");
 	}
 

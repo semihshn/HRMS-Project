@@ -12,46 +12,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.CityService;
+import kodlamaio.hrms.business.abstracts.SchoolService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
-import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.School;
 
 @RestController
-@RequestMapping("/api/cities")
+@RequestMapping("/api/schools")
 @CrossOrigin
-public class CitiesController {
+public class SchoolsController {
 	
-	private CityService cityService;
+	private SchoolService schoolService;
 
 	@Autowired
-	public CitiesController(CityService cityService) {
-		this.cityService=cityService;
+	public SchoolsController(SchoolService schoolService) {
+		this.schoolService=schoolService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<City>> getAll(){
-		return this.cityService.getAll();
+	public DataResult<List<School>> getAll(){
+		return this.schoolService.getAll();
 	}
 	
 	@GetMapping("/getById")
-	public DataResult<City> getById(@RequestParam(value = "cityId") int cityId){
-		return this.cityService.getById(cityId);
+	public DataResult<School> getById(@RequestParam(value = "schoolId") int schoolId){
+		return this.schoolService.getById(schoolId);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody City city) {
-		return this.cityService.add(city);
+	public Result add(@RequestBody School school) {
+		return this.schoolService.add(school);
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody City city) {
-		return this.cityService.update(city);
+	public Result update(@RequestBody School school) {
+		return this.schoolService.update(school);
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody City city) {
-		return this.cityService.delete(city);
+	public Result delete(@RequestBody School school) {
+		return this.schoolService.delete(school);
 	}
 
 }

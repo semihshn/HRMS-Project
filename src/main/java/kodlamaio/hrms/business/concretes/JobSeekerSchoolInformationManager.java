@@ -27,19 +27,19 @@ public class JobSeekerSchoolInformationManager implements JobSeekerSchoolInforma
 	public Result add(JobSeekerSchoolInformation jobSeekerSchoolInformation) {
 		// TODO Auto-generated method stub
 		this.jobSeekerSchoolInformationDao.save(jobSeekerSchoolInformation);
-		return new SuccessResult("İşveren kaydı eklendi");
+		return new SuccessResult("İş arayan okul bilgileri kaydı eklendi");
 	}
 
 	@Override
 	public Result update(JobSeekerSchoolInformation jobSeekerSchoolInformation) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı güncellendi");
+		return new SuccessResult("İş arayan okul bilgileri kaydı güncellendi");
 	}
 
 	@Override
 	public Result delete(JobSeekerSchoolInformation jobSeekerSchoolInformation) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı silindi");
+		return new SuccessResult("İş arayan okul bilgileri kaydı silindi");
 	}
 
 	@Override

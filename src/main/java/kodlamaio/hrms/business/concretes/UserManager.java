@@ -42,12 +42,14 @@ public class UserManager implements UserService{
 	@Override
 	public Result update(User user) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("Kullanıcı eklendi");
+		this.userDao.save(user);
+		return new SuccessResult("Kullanıcı güncellendi");
 	}
 
 	@Override
 	public Result delete(User user) {
 		// TODO Auto-generated method stub
+		this.userDao.delete(user);
 		return new SuccessResult("Kullanıcı silindi");
 	}
 

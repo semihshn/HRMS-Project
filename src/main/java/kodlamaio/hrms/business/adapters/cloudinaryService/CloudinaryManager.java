@@ -29,6 +29,8 @@ public class CloudinaryManager implements CloudinaryAdapter{
 		
 	}
 
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public DataResult<Map> uploadImageFile(MultipartFile imageFile) {
 		try {

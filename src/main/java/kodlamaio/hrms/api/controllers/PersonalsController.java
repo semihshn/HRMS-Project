@@ -12,46 +12,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.CityService;
+import kodlamaio.hrms.business.abstracts.PersonalService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
-import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.Personal;
 
 @RestController
-@RequestMapping("/api/cities")
+@RequestMapping("/api/personals")
 @CrossOrigin
-public class CitiesController {
-	
-	private CityService cityService;
+public class PersonalsController {
+
+	private PersonalService personalService;
 
 	@Autowired
-	public CitiesController(CityService cityService) {
-		this.cityService=cityService;
+	public PersonalsController(PersonalService personalService) {
+		this.personalService=personalService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<City>> getAll(){
-		return this.cityService.getAll();
+	public DataResult<List<Personal>> getAll(){
+		return this.personalService.getAll();
 	}
 	
 	@GetMapping("/getById")
-	public DataResult<City> getById(@RequestParam(value = "cityId") int cityId){
-		return this.cityService.getById(cityId);
+	public DataResult<Personal> getById(@RequestParam(value = "personalId") int personalId){
+		return this.personalService.getById(personalId);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody City city) {
-		return this.cityService.add(city);
+	public Result add(@RequestBody Personal personal) {
+		return this.personalService.add(personal);
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody City city) {
-		return this.cityService.update(city);
+	public Result update(@RequestBody Personal personal) {
+		return this.personalService.update(personal);
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody City city) {
-		return this.cityService.delete(city);
+	public Result delete(@RequestBody Personal personal) {
+		return this.personalService.delete(personal);
 	}
-
+	
 }

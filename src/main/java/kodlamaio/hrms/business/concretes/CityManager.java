@@ -34,6 +34,7 @@ public class CityManager implements CityService{
 	@Override
 	public Result update(City city) {
 		// TODO Auto-generated method stub
+		this.cityDao.save(city);
 		return new SuccessResult("Şehir güncellendi");
 	}
 

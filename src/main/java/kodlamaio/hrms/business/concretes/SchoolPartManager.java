@@ -16,7 +16,7 @@ import kodlamaio.hrms.entities.concretes.SchoolPart;
 @Service
 public class SchoolPartManager implements SchoolPartService{
 
-private SchoolPartDao schoolPartDao;
+	private SchoolPartDao schoolPartDao;
 	
 	@Autowired
 	public SchoolPartManager(SchoolPartDao schoolPartDao) {
@@ -33,12 +33,14 @@ private SchoolPartDao schoolPartDao;
 	@Override
 	public Result update(SchoolPart schoolPart) {
 		// TODO Auto-generated method stub
+		this.schoolPartDao.save(schoolPart);
 		return new SuccessResult("Okul bölümü güncellendi");
 	}
 
 	@Override
 	public Result delete(SchoolPart schoolPart) {
 		// TODO Auto-generated method stub
+		this.schoolPartDao.save(schoolPart);
 		return new SuccessResult("Okul bölümü silindi");
 	}
 

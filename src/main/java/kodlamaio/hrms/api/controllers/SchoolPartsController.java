@@ -12,46 +12,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.CityService;
+import kodlamaio.hrms.business.abstracts.SchoolPartService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
-import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.SchoolPart;
 
 @RestController
-@RequestMapping("/api/cities")
+@RequestMapping("/api/schoolparts")
 @CrossOrigin
-public class CitiesController {
-	
-	private CityService cityService;
+public class SchoolPartsController {
+
+	private SchoolPartService schoolPartService;
 
 	@Autowired
-	public CitiesController(CityService cityService) {
-		this.cityService=cityService;
+	public SchoolPartsController(SchoolPartService schoolPartService) {
+		this.schoolPartService=schoolPartService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<City>> getAll(){
-		return this.cityService.getAll();
+	public DataResult<List<SchoolPart>> getAll(){
+		return this.schoolPartService.getAll();
 	}
 	
 	@GetMapping("/getById")
-	public DataResult<City> getById(@RequestParam(value = "cityId") int cityId){
-		return this.cityService.getById(cityId);
+	public DataResult<SchoolPart> getById(@RequestParam(value = "schoolPartId") int schoolPartId){
+		return this.schoolPartService.getById(schoolPartId);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody City city) {
-		return this.cityService.add(city);
+	public Result add(@RequestBody SchoolPart schoolPart) {
+		return this.schoolPartService.add(schoolPart);
 	}
 	
 	@PostMapping("/update")
-	public Result update(@RequestBody City city) {
-		return this.cityService.update(city);
+	public Result update(@RequestBody SchoolPart schoolPart) {
+		return this.schoolPartService.update(schoolPart);
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody City city) {
-		return this.cityService.delete(city);
+	public Result delete(@RequestBody SchoolPart schoolPart) {
+		return this.schoolPartService.delete(schoolPart);
 	}
-
+	
 }

@@ -2,7 +2,6 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,8 +37,13 @@ public class JobSeekerSchoolInformation {
 	@JoinColumn(name="jobseeker_id")
 	private JobSeeker jobSeeker;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "school_id", referencedColumnName = "id")
-    private School school;
+	@ManyToOne
+	@JoinColumn(name="school_id")
+	private School school;
+	
+	@ManyToOne
+	@JoinColumn(name="school_part_id")
+	private SchoolPart schoolPart;
+	
 
 }

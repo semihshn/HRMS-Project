@@ -45,7 +45,7 @@ public class Employer {
 	@Column(name="status")
 	private boolean status;
 	
-	@OneToMany(mappedBy="employer",targetEntity = JobAdvert.class)
+	@OneToMany(mappedBy="employer")
 	private List<JobAdvert> jobAdverts;
 	
 	/*@OneToOne(mappedBy = "employer")

@@ -8,6 +8,7 @@ import kodlamaio.hrms.core.utilities.result.DataResult;
 
 public interface CloudinaryAdapter {
 
+	@SuppressWarnings("rawtypes")
 	DataResult<Map> uploadImageFile(MultipartFile imageFile);
 	
 }

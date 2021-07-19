@@ -12,14 +12,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kodlamaio.hrms.entities.concretes.EmailActivation;
-import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
-import kodlamaio.hrms.entities.concretes.MernisActivation;
-import kodlamaio.hrms.entities.concretes.Personal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name="users")
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","emailActivations","mernisActivations","employer","jobSeeker","personal"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","emailActivations","mernisActivations","employer","jobSeeker","personal"})
 public class User {
 	
 	@Id
@@ -43,11 +39,16 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy  = "user")
 	private List<EmailActivation> emailActivations;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy  = "user")
 	private List<Image> images;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "user")
+    private JobSeeker jobSeeker;
 	
 }

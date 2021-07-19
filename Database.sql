@@ -1,4 +1,3 @@
-
 create table IF NOT EXISTS users( 
 	id SERIAL PRIMARY KEY NOT NULL, 
 	email varchar(100) NOT NULL, 
@@ -26,11 +25,8 @@ create table IF NOT EXISTS schools(
 );
 
 create table IF NOT EXISTS school_parts( 
-	id SERIAL NOT NULL,
-	school_id integer NOT NULL, 
+	id SERIAL PRIMARY KEY NOT NULL,
 	name varchar(50) NOT NULL,
-	PRIMARY KEY(id),
-	CONSTRAINT fk_schools FOREIGN KEY(school_id) REFERENCES schools(id)
 );
 
 create table IF NOT EXISTS languages( 
@@ -68,16 +64,16 @@ create table IF NOT EXISTS jobseeker_contact_informations(
 	CONSTRAINT fk_job_seekers FOREIGN KEY(jobseeker_id) REFERENCES job_seekers(id)
 );
 
-
-
 create table IF NOT EXISTS jobseeker_school_informations( 
 	id SERIAL NOT NULL,
 	school_id integer NOT NULL, 
+	school_part_id integer NOT NULL, 
 	jobseeker_id integer NOT NULL, 
 	university_start_date date NOT NULL,
 	university_graduation_date date,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_schools FOREIGN KEY(school_id) REFERENCES schools(id),
+	CONSTRAINT fk_school_parts FOREIGN KEY(school_part_id) REFERENCES school_parts(id),
 	CONSTRAINT fk_job_seekers FOREIGN KEY(jobseeker_id) REFERENCES job_seekers(id)
 );
 
