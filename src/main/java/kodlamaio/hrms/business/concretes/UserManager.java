@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 import kodlamaio.hrms.business.abstracts.UserService;
@@ -19,9 +18,8 @@ import kodlamaio.hrms.core.utilities.result.SuccessResult;
 @Service
 public class UserManager implements UserService{
 
-	private UserDao userDao;
+	private final UserDao userDao;
 	
-	@Autowired
 	public UserManager(UserDao userDao) {
 		this.userDao = userDao;
 	}
@@ -30,9 +28,9 @@ public class UserManager implements UserService{
 	public Result add(User user) {
 		// TODO Auto-generated method stub
 		Result result=BusinessRules.run();
-		
-		if (result!=null) {
-			return result;
+
+		if (!result.isSuccess()) {
+		return result;
 		}
 		
 		this.userDao.save(user);
@@ -47,9 +45,9 @@ public class UserManager implements UserService{
 	}
 
 	@Override
-	public Result delete(User user) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		this.userDao.delete(user);
+		this.userDao.deleteById(id);
 		return new SuccessResult("Kullanıcı silindi");
 	}
 
@@ -84,7 +82,7 @@ public class UserManager implements UserService{
 	@Override
 	public DataResult<User> getByEmailWithUserId(int userId) {
 		
-		Optional<User> user = userDao.findByEmail(userId);
+		Optional<User> user = userDao.findById(userId);
 		
 		if (user.isEmpty())
 			return new ErrorDataResult<User>("Kullanıcı bulunamadı");

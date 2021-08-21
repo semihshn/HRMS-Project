@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ProgramingLanguageService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.ProgramingLanguage;
 @Service
 public class ProgramingLanguageManager implements ProgramingLanguageService{
 
-	private ProgramingLanguageDao programingLanguageDao;
+	private final ProgramingLanguageDao programingLanguageDao;
 	
-	@Autowired
 	public ProgramingLanguageManager(ProgramingLanguageDao programingLanguageDao) {
 		this.programingLanguageDao = programingLanguageDao;
 	}
@@ -33,12 +31,14 @@ public class ProgramingLanguageManager implements ProgramingLanguageService{
 	@Override
 	public Result update(ProgramingLanguage programingLanguage) {
 		// TODO Auto-generated method stub
+		this.programingLanguageDao.save(programingLanguage);
 		return new SuccessResult("Programlama dili güncellendi");
 	}
 
 	@Override
-	public Result delete(ProgramingLanguage programingLanguage) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.programingLanguageDao.deleteById(id);
 		return new SuccessResult("Programlama dili silindi");
 	}
 

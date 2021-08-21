@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
-public class Employer {
+public class Employer{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

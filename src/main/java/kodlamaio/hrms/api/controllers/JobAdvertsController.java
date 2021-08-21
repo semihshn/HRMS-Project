@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +22,8 @@ import kodlamaio.hrms.entities.concretes.JobAdvert;
 @CrossOrigin
 public class JobAdvertsController {
 
-	private JobAdvertService jobAdvertService;
+	private final JobAdvertService jobAdvertService;
 
-	@Autowired
 	public JobAdvertsController(JobAdvertService jobAdvertService) {
 		this.jobAdvertService=jobAdvertService;
 	}
@@ -50,19 +48,24 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getByEmployerId(employerId);
 	}
 	
+	@GetMapping("/getByIsActive")
+	public DataResult<List<JobAdvert>> getByIsActive(@RequestParam Boolean isActive){
+		return this.jobAdvertService.getByIsActive(isActive);
+	}
+	
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvert jobAdvert) {
 		return this.jobAdvertService.add(jobAdvert);
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public Result update(@RequestBody JobAdvert jobAdvert) {
 		return this.jobAdvertService.update(jobAdvert);
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody JobAdvert jobAdvert) {
-		return this.jobAdvertService.delete(jobAdvert);
+	public Result delete(@RequestParam int jobAdvertId) {
+		return this.jobAdvertService.delete(jobAdvertId);
 	}
 	
 	@PutMapping("/employerAdvertMakePassive")

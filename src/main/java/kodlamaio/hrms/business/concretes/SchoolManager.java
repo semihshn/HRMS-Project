@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SchoolService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.School;
 @Service
 public class SchoolManager implements SchoolService{
 	
-	private SchoolDao schoolDao;
+	private final SchoolDao schoolDao;
 	
-	@Autowired
 	public SchoolManager(SchoolDao schoolDao) {
 		this.schoolDao = schoolDao;
 	}
@@ -38,9 +36,9 @@ public class SchoolManager implements SchoolService{
 	}
 
 	@Override
-	public Result delete(School school) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		this.schoolDao.delete(school);
+		this.schoolDao.deleteById(id);
 		return new SuccessResult("Okul bölümü silindi");
 	}
 

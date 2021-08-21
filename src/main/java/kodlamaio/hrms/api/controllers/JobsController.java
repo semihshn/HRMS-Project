@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,8 @@ import kodlamaio.hrms.entities.concretes.Job;
 @CrossOrigin
 public class JobsController {
 
-	private JobService jobService;
+	private final JobService jobService;
 
-	@Autowired
 	public JobsController(JobService jobService) {
 		this.jobService = jobService;
 	}
@@ -50,8 +48,8 @@ public class JobsController {
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody Job job) {
-		return this.jobService.delete(job);
+	public Result delete(@RequestParam Integer id) {
+		return this.jobService.delete(id);
 	}
 	
 }

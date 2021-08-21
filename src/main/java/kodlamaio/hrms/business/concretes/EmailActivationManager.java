@@ -3,7 +3,6 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmailActivationService;
@@ -26,11 +25,10 @@ import kodlamaio.hrms.business.constants.Messages;
 @Service
 public class EmailActivationManager implements EmailActivationService{
 
-	private EmailActivationDao emailActivationDao;
+	private final EmailActivationDao emailActivationDao;
 	private final EmailAdapter emailAdapter;
 	private final UserService userService;
 	
-	@Autowired
 	public EmailActivationManager(EmailActivationDao emailActivationDao,EmailAdapter emailAdapter,UserService userService) {
 		super();
 		this.emailActivationDao = emailActivationDao;
@@ -52,8 +50,9 @@ public class EmailActivationManager implements EmailActivationService{
 	}
 
 	@Override
-	public Result delete(EmailActivation emailActivation) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.emailActivationDao.deleteById(id);
 		return new SuccessResult("E-mail silindi");
 	}
 

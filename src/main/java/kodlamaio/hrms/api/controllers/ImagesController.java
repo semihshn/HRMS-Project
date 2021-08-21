@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +22,8 @@ import kodlamaio.hrms.entities.concretes.Image;
 @CrossOrigin
 public class ImagesController {
 	
-	private ImageService imageService;
+	private final ImageService imageService;
 
-	@Autowired
 	public ImagesController(ImageService imageService) {
 		this.imageService=imageService;
 	}
@@ -51,8 +49,8 @@ public class ImagesController {
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody Image image) {
-		return this.imageService.delete(image);
+	public Result delete(@RequestParam Integer id) {
+		return this.imageService.delete(id);
 	}
 
 }

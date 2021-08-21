@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,8 @@ import kodlamaio.hrms.entities.concretes.MernisActivation;
 @CrossOrigin
 public class MernisActivationsController {
 
-	private MernisActivationService mernisActivationService;
+	private final MernisActivationService mernisActivationService;
 
-	@Autowired
 	public MernisActivationsController(MernisActivationService mernisActivationService) {
 		this.mernisActivationService=mernisActivationService;
 	}
@@ -50,8 +48,8 @@ public class MernisActivationsController {
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody MernisActivation mernisActivation) {
-		return this.mernisActivationService.delete(mernisActivation);
+	public Result delete(@RequestParam Integer id) {
+		return this.mernisActivationService.delete(id);
 	}
 	
 }

@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.KnownProgramingLanguageService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.KnownProgramingLanguage;
 @Service
 public class KnownPrograminLanguageManager implements KnownProgramingLanguageService{
 
-	private KnownProgramingLanguageDao knownProgramingLanguageDao;
+	private final KnownProgramingLanguageDao knownProgramingLanguageDao;
 	
-	@Autowired
 	public KnownPrograminLanguageManager(KnownProgramingLanguageDao knownProgramingLanguageDao) {
 		this.knownProgramingLanguageDao = knownProgramingLanguageDao;
 	}
@@ -27,19 +25,21 @@ public class KnownPrograminLanguageManager implements KnownProgramingLanguageSer
 	public Result add(KnownProgramingLanguage knownProgramingLanguage) {
 		// TODO Auto-generated method stub
 		this.knownProgramingLanguageDao.save(knownProgramingLanguage);
-		return new SuccessResult("İşveren kaydı eklendi");
+		return new SuccessResult("İş arayan programlama dili bilgisi kaydı eklendi");
 	}
 
 	@Override
 	public Result update(KnownProgramingLanguage knownProgramingLanguage) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı güncellendi");
+		this.knownProgramingLanguageDao.save(knownProgramingLanguage);
+		return new SuccessResult("İş arayan programlama dili bilgisi kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(KnownProgramingLanguage knownProgramingLanguage) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı silindi");
+		this.knownProgramingLanguageDao.deleteById(id);
+		return new SuccessResult("İş arayan programlama dili bilgisi kaydı silindi");
 	}
 
 	@Override

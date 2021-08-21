@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.LanguageService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.Language;
 @Service
 public class LanguageManager implements LanguageService{
 	
-	private LanguageDao languageDao;
+	private final LanguageDao languageDao;
 	
-	@Autowired
 	public LanguageManager(LanguageDao languageDao) {
 		this.languageDao = languageDao;
 	}
@@ -33,12 +31,14 @@ public class LanguageManager implements LanguageService{
 	@Override
 	public Result update(Language language) {
 		// TODO Auto-generated method stub
+		this.languageDao.save(language);
 		return new SuccessResult("Yabancı dil güncellendi");
 	}
 
 	@Override
-	public Result delete(Language language) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.languageDao.deleteById(id);
 		return new SuccessResult("Yabancı dil silindi");
 	}
 

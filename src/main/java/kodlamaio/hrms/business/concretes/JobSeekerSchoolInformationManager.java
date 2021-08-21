@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerSchoolInformationService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.JobSeekerSchoolInformation;
 @Service
 public class JobSeekerSchoolInformationManager implements JobSeekerSchoolInformationService{
 
-	private JobSeekerSchoolInformationDao jobSeekerSchoolInformationDao;
+	private final JobSeekerSchoolInformationDao jobSeekerSchoolInformationDao;
 	
-	@Autowired
 	public JobSeekerSchoolInformationManager(JobSeekerSchoolInformationDao jobSeekerSchoolInformationDao) {
 		this.jobSeekerSchoolInformationDao = jobSeekerSchoolInformationDao;
 	}
@@ -33,12 +31,14 @@ public class JobSeekerSchoolInformationManager implements JobSeekerSchoolInforma
 	@Override
 	public Result update(JobSeekerSchoolInformation jobSeekerSchoolInformation) {
 		// TODO Auto-generated method stub
+		this.jobSeekerSchoolInformationDao.save(jobSeekerSchoolInformation);
 		return new SuccessResult("İş arayan okul bilgileri kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(JobSeekerSchoolInformation jobSeekerSchoolInformation) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.jobSeekerSchoolInformationDao.deleteById(id);
 		return new SuccessResult("İş arayan okul bilgileri kaydı silindi");
 	}
 

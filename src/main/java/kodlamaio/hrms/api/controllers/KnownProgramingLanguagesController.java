@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,8 @@ import kodlamaio.hrms.entities.concretes.KnownProgramingLanguage;
 @CrossOrigin
 public class KnownProgramingLanguagesController {
 
-	private KnownProgramingLanguageService knownProgramingLanguageService;
+	private final KnownProgramingLanguageService knownProgramingLanguageService;
 
-	@Autowired
 	public KnownProgramingLanguagesController(KnownProgramingLanguageService knownProgramingLanguageService) {
 		this.knownProgramingLanguageService = knownProgramingLanguageService;
 	}
@@ -50,8 +48,8 @@ public class KnownProgramingLanguagesController {
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody KnownProgramingLanguage knownProgramingLanguage) {
-		return this.knownProgramingLanguageService.delete(knownProgramingLanguage);
+	public Result delete(@RequestParam Integer id) {
+		return this.knownProgramingLanguageService.delete(id);
 	}
 	
 }

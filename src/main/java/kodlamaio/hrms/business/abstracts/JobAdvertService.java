@@ -11,6 +11,8 @@ public interface JobAdvertService extends BaseService<JobAdvert,Integer>{
 
 	DataResult<List<JobAdvert>> getAllSorted();
 	
+	DataResult<List<JobAdvert>> getByIsActive(Boolean isActive);
+	
 	DataResult<List<JobAdvert>> getByEmployerId(int employerId);
 	
 	Result employerAdvertMakePassive(int employerId,int jobAdvertId);

@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerContactInformationService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.JobSeekerContactInformation;
 @Service
 public class JobSeekerContactInformationManager implements JobSeekerContactInformationService{
 
-	private JobSeekerContactInformationDao jobSeekerContactInformationDao;
+	private final JobSeekerContactInformationDao jobSeekerContactInformationDao;
 	
-	@Autowired
 	public JobSeekerContactInformationManager(JobSeekerContactInformationDao jobSeekerContactInformationDao) {
 		this.jobSeekerContactInformationDao = jobSeekerContactInformationDao;
 	}
@@ -37,8 +35,9 @@ public class JobSeekerContactInformationManager implements JobSeekerContactInfor
 	}
 
 	@Override
-	public Result delete(JobSeekerContactInformation jobSeekerContactInformation) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.jobSeekerContactInformationDao.deleteById(id);
 		return new SuccessResult("İşveren kaydı silindi");
 	}
 

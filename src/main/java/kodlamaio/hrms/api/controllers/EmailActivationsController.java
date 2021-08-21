@@ -2,7 +2,6 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,8 @@ import kodlamaio.hrms.entities.concretes.EmailActivation;
 @CrossOrigin
 public class EmailActivationsController {
 	
-	private EmailActivationService emailActivationService;
+	private final EmailActivationService emailActivationService;
 
-	@Autowired
 	public EmailActivationsController(EmailActivationService emailActivationService) {
 		this.emailActivationService=emailActivationService;
 	}
@@ -50,8 +48,8 @@ public class EmailActivationsController {
 	}
 	
 	@DeleteMapping("/delete")
-	public Result delete(@RequestBody EmailActivation emailActivation) {
-		return this.emailActivationService.delete(emailActivation);
+	public Result delete(@RequestParam Integer id) {
+		return this.emailActivationService.delete(id);
 	}
 
 }

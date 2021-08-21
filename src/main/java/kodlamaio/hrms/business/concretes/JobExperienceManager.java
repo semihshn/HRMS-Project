@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobExperienceService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.JobExperience;
 @Service
 public class JobExperienceManager implements JobExperienceService{
 
-	private JobExperienceDao jobExperienceDao;
+	private final JobExperienceDao jobExperienceDao;
 	
-	@Autowired
 	public JobExperienceManager(JobExperienceDao jobExperienceDao) {
 		this.jobExperienceDao = jobExperienceDao;
 	}
@@ -33,13 +31,14 @@ public class JobExperienceManager implements JobExperienceService{
 	@Override
 	public Result update(JobExperience jobExperience) {
 		// TODO Auto-generated method stub
+		this.jobExperienceDao.save(jobExperience);
 		return new SuccessResult("İşveren kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(JobExperience jobExperience) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		this.jobExperienceDao.delete(jobExperience);
+		this.jobExperienceDao.deleteById(id);
 		return new SuccessResult("İşveren kaydı silindi");
 	}
 

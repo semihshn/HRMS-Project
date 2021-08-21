@@ -3,7 +3,6 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,11 +20,10 @@ import kodlamaio.hrms.entities.concretes.JobSeeker;
 @Service
 public class ImageManager implements ImageService{
 	
-	private ImageDao imageDao;
-	private JobSeekerDao jobSeekerDao;
-	private CloudinaryAdapter cloudinaryAdapter;
+	private final ImageDao imageDao;
+	private final JobSeekerDao jobSeekerDao;
+	private final CloudinaryAdapter cloudinaryAdapter;
 	
-	@Autowired
 	public ImageManager(ImageDao imageDao,CloudinaryAdapter cloudinaryAdapter,
 						JobSeekerDao jobSeekerDao) {
 		
@@ -60,9 +58,9 @@ public class ImageManager implements ImageService{
 	}
 
 	@Override
-	public Result delete(Image entity) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		imageDao.delete(entity);
+		imageDao.deleteById(id);
 		return new SuccessResult("Resim kaydı silindi");
 	}
 

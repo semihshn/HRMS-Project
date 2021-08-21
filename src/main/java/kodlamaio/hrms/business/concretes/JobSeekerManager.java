@@ -3,7 +3,6 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -22,16 +21,16 @@ import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import kodlamaio.hrms.entities.dtos.JobSeekerCvDto;
 import kodlamaio.hrms.entities.dtos.converter.Converter;
+
 @Service
 public class JobSeekerManager implements JobSeekerService{
 
-	private JobSeekerDao jobSeekerDao;
-	private UserService userService;
-	private EmailActivationService emailActivationService;
-	private MernisActivationService mernisActivationService;
-	private Converter converter;
+	private final JobSeekerDao jobSeekerDao;
+	private final UserService userService;
+	private final EmailActivationService emailActivationService;
+	private final MernisActivationService mernisActivationService;
+	private final Converter converter;
 	
-	@Autowired
 	public JobSeekerManager(JobSeekerDao jobSeekerDao,UserService userService
 							,MernisActivationService mernisActivationService
 							,EmailActivationService emailActivationService,
@@ -56,7 +55,7 @@ public class JobSeekerManager implements JobSeekerService{
 										,this.emailVerification(jobSeeker.getUser().getEmail())
 												);
 		
-		if (result.isSuccess()) {
+		if (!result.isSuccess()) {
 			return result;
 		}
 		
@@ -71,9 +70,9 @@ public class JobSeekerManager implements JobSeekerService{
 	}
 
 	@Override
-	public Result delete(JobSeeker jobSeeker) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		jobSeekerDao.delete(jobSeeker);
+		jobSeekerDao.deleteById(id);
 		return new SuccessResult("İş arayan silindi");
 	}
 

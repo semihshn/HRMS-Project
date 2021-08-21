@@ -8,7 +8,7 @@ import kodlamaio.hrms.core.utilities.result.Result;
 public interface BaseService<T, Id> {
 	Result add(T entity);
 
-	Result delete(T entity);
+	Result delete(Id id);
 	
 	Result update(T entity);
 

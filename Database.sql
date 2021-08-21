@@ -1,3 +1,4 @@
+
 create table IF NOT EXISTS users( 
 	id SERIAL PRIMARY KEY NOT NULL, 
 	email varchar(100) NOT NULL, 
@@ -166,7 +167,7 @@ CREATE TABLE IF NOT EXISTS job_adverts
     number_of_open_position integer NOT NULL,
     created_at timestamp with time zone NOT NULL,
     application_deadline timestamp with time zone,
-	is_active boolean NOT NULL,
+    is_active boolean NOT NULL default true,
 	PRIMARY KEY(id),
 	CONSTRAINT fk_employers FOREIGN KEY(employer_id) REFERENCES employers(id),
 	CONSTRAINT fk_jobs FOREIGN KEY(job_position_id) REFERENCES jobs(id),

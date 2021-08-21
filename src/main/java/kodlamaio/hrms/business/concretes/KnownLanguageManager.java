@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.KnownLanguageService;
@@ -16,9 +15,8 @@ import kodlamaio.hrms.entities.concretes.KnownLanguage;
 @Service
 public class KnownLanguageManager implements KnownLanguageService{
 
-	private KnownLanguageDao knownLanguageDao;
+	private final KnownLanguageDao knownLanguageDao;
 	
-	@Autowired
 	public KnownLanguageManager(KnownLanguageDao knownLanguageDao) {
 		this.knownLanguageDao = knownLanguageDao;
 	}
@@ -27,19 +25,21 @@ public class KnownLanguageManager implements KnownLanguageService{
 	public Result add(KnownLanguage knownLanguage) {
 		// TODO Auto-generated method stub
 		this.knownLanguageDao.save(knownLanguage);
-		return new SuccessResult("İşveren kaydı eklendi");
+		return new SuccessResult("İş arayan dil bilgisi kaydı eklendi");
 	}
 
 	@Override
 	public Result update(KnownLanguage knownLanguage) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı güncellendi");
+		this.knownLanguageDao.save(knownLanguage);
+		return new SuccessResult("İş arayan dil bilgisi kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(KnownLanguage knownLanguage) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		return new SuccessResult("İşveren kaydı silindi");
+		this.knownLanguageDao.deleteById(id);
+		return new SuccessResult("İş arayan dil bilgisi kaydı silindi");
 	}
 
 	@Override

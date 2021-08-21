@@ -51,16 +51,9 @@ public class JobSeeker {
 	@Column(name="status")
 	private boolean status;
 	
-	/*@Column(name="job_wanted_id")
-	private int jobWantedId;*/
-	
 	@ManyToOne()
     @JoinColumn(name = "job_wanted_id")
     private Job job;
-	
-	/*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_wanted_id", referencedColumnName = "id")
-    private Job job;*/
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

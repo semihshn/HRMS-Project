@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.MernisActivationService;
@@ -20,10 +19,9 @@ import kodlamaio.hrms.entities.concretes.MernisActivation;
 public class MernisActivationManager implements MernisActivationService{
 	
 
-	private MernisActivationDao mernisActivationDao;
-	private MernisAdapter mernisAdapter;
+	private final MernisActivationDao mernisActivationDao;
+	private final MernisAdapter mernisAdapter;
 	
-	@Autowired
 	public MernisActivationManager(MernisActivationDao mernisActivationDao,MernisAdapter mernisAdapter) {
 		super();
 		this.mernisActivationDao = mernisActivationDao;
@@ -40,12 +38,14 @@ public class MernisActivationManager implements MernisActivationService{
 	@Override
 	public Result update(MernisActivation mernisActivation) {
 		// TODO Auto-generated method stub
+		this.mernisActivationDao.save(mernisActivation);
 		return new SuccessResult("Mernis kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(MernisActivation mernisActivation) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.mernisActivationDao.deleteById(id);
 		return new SuccessResult("Mernis kaydı silindi");
 	}
 

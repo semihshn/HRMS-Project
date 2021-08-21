@@ -2,7 +2,6 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
@@ -19,9 +18,8 @@ import kodlamaio.hrms.entities.concretes.Job;
 @Service
 public class JobManager implements JobService{
 
-	private JobDao jobDao;
+	private final JobDao jobDao;
 	
-	@Autowired
 	public JobManager(JobDao jobDao) {
 		this.jobDao = jobDao;
 	}
@@ -49,9 +47,9 @@ public class JobManager implements JobService{
 	}
 
 	@Override
-	public Result delete(Job job) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
-		jobDao.delete(job);
+		jobDao.deleteById(id);
 		return new SuccessResult("İş dalı silindi");
 		
 	}

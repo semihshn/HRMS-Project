@@ -2,9 +2,10 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
@@ -18,9 +19,8 @@ import kodlamaio.hrms.entities.concretes.JobAdvert;
 @Service
 public class JobAdvertManager implements JobAdvertService{
 
-	private JobAdvertDao jobAdvertDao;
+	private final JobAdvertDao jobAdvertDao;
 	
-	@Autowired
 	public JobAdvertManager(JobAdvertDao jobAdvertDao) {
 		this.jobAdvertDao = jobAdvertDao;
 	}
@@ -33,14 +33,17 @@ public class JobAdvertManager implements JobAdvertService{
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Result update(JobAdvert jobAdvert) {
 		// TODO Auto-generated method stub
+		this.jobAdvertDao.save(jobAdvert);
 		return new SuccessResult("İş ilanı kaydı güncellendi");
 	}
 
 	@Override
-	public Result delete(JobAdvert jobAdvert) {
+	public Result delete(Integer id) {
 		// TODO Auto-generated method stub
+		this.jobAdvertDao.deleteById(id);
 		return new SuccessResult("İş ilanı kaydı silindi");
 	}
 
@@ -92,6 +95,12 @@ public class JobAdvertManager implements JobAdvertService{
 			
 		}
 		
+	}
+
+	@Override
+	public DataResult<List<JobAdvert>> getByIsActive(Boolean isActive) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActive(isActive));
 	}
 	
 }

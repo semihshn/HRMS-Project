@@ -40,27 +40,25 @@ public class JobAdvert {
 	@Column(name="number_of_open_position")
 	private int numberOfOpenPosition;
 	
-	/*@Column(name="created_at")
-	private Date createdAt;*/
-	
     @NotNull
     @Column(name = "created_at", columnDefinition = "Date default CURRENT_DATE")
     private final LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name="application_deadline")
 	private LocalDateTime applicationDeadline;
+	
+	@Column(name="working_type")
+	private String workingType;
+	
+	@Column(name="working_time_type")
+	private String workingTimeType;
 
 	@Column(name="is_active")
 	private boolean isActive;
-	
-	//targetEntity = İlişkiyi hangi entity ile kuracağını belirtiyoruz
-	@ManyToOne(targetEntity = Employer.class)
+
+	@ManyToOne()
 	@JoinColumn(name="employer_id")
 	private Employer employer;
-	
-	/*@OneToOne()
-    @JoinColumn(name = "employer_id", referencedColumnName = "id")
-    private Employer employer;*/
 	
 	@ManyToOne
 	@JoinColumn(name="job_position_id")
@@ -69,9 +67,5 @@ public class JobAdvert {
 	@ManyToOne
 	@JoinColumn(name="city_id")
 	private City city;
-	
-	/*@OneToOne()
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    private City city;*/
 
 }
