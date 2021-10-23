@@ -13,4 +13,7 @@ public interface UserService extends BaseService<User,Integer>{
 
 	Result checkIfEmailExist(String email);
 	
+	DataResult<User> findByEmailAndPassword(String email,String password);
+	
+	
 }

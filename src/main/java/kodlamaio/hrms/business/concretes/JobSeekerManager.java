@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.business.adapters.mernisService.PersonForValidateFromMernisService;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
@@ -48,16 +50,17 @@ public class JobSeekerManager implements JobSeekerService{
 	@Override
 	public Result add(JobSeeker jobSeeker) {
 		// TODO Auto-generated method stub
-		
-		Result result=BusinessRules.run(userService.checkIfEmailExist(jobSeeker.getUser().getEmail())
+
+		/*Result result=BusinessRules.run(userService.checkIfEmailExist(jobSeeker.getUser().getEmail())
 										,this.checkIfNationalIdExist(jobSeeker.getNationalityId())
 										,mernisActivationService.check(new PersonForValidateFromMernisService())
 										,this.emailVerification(jobSeeker.getUser().getEmail())
 												);
+		System.out.println(result.isSuccess());
 		
 		if (!result.isSuccess()) {
 			return result;
-		}
+		}*/
 		
 		this.jobSeekerDao.save(jobSeeker);
 		return new SuccessResult("İş arayan eklendi");
@@ -100,12 +103,6 @@ public class JobSeekerManager implements JobSeekerService{
 				: new ErrorResult();
 	}
 
-	/*@Override
-	public DataResult<List<Job>> getJobSeekerCvDetails() {
-		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<Job>>(this.jobSeekerDao.getJobSeekerCvDetails());
-	}*/
-
 	@Override
 	public DataResult<List<JobSeekerCvDto>> getAllCv() {
 		
@@ -125,6 +122,27 @@ public class JobSeekerManager implements JobSeekerService{
 				.collect(Collectors.toList()),"Seçmiş olduğunuz iş arayanın Cv bilgisi başarılı şekilde getirildi");
 	}
 
-	
+	@Override
+	public DataResult<JobSeeker> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.findByUserId(id));
+	}
+
+	@Override
+	public DataResult<JobSeeker> findByEmailAndPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		Optional<JobSeeker> employer=this.jobSeekerDao.findByUser_EmailAndUser_Password(email, password);
+		if (employer.isPresent()) {
+			return new SuccessDataResult<JobSeeker>(employer.get());
+		} else {
+			return new ErrorDataResult<JobSeeker>("Bu email veya şifreye ait kullanıcı bulunamadı");
+		}
+	}
+
+	@Override
+	public DataResult<JobSeeker> getByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.findByUserId(userId));
+	}
 
 }

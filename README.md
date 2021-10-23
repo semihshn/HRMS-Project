@@ -24,9 +24,20 @@
 
 <p align="center">
 
-<h2 align="center">Model</h2>
+<h2 align="center" style="color:#06EAD6">Database Model</h2>
 
 <img align="center" src="./ReadmeImage/Diagram.PNG">
+
+</p>
+
+<br />
+<br />
+
+<p align="center">
+
+<h2 align="center" style="color:#08CB18">API</h2>
+
+<img align="center" src="./ReadmeImage/swagger.png">
 
 </p>
 

@@ -38,6 +38,11 @@ public class JobSeekersController {
 		return this.jobSeekerService.getById(jobSeekerId);
 	}
 	
+	@GetMapping("/getByUserId")
+	public DataResult<JobSeeker> getByUserId(@RequestParam(value = "jobSeekerUserId") int jobSeekerUserId){
+		return this.jobSeekerService.getByUserId(jobSeekerUserId);
+	}
+	
 	@GetMapping("/getAllCv")
 	public DataResult<List<JobSeekerCvDto>> getAllCv(){
 		return this.jobSeekerService.getAllCv();

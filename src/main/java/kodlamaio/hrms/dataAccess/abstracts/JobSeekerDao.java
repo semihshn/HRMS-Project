@@ -9,4 +9,8 @@ public interface JobSeekerDao extends JpaRepository<JobSeeker, Integer>{
 	
 	Optional<JobSeeker> findByNationalityId(String nationalityId);
 	
+	JobSeeker findByUserId(int id);
+	
+	Optional<JobSeeker> findByUser_EmailAndUser_Password(String email,String password);
+	
 }

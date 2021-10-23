@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.business.validationRules.EmployerValidator;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
@@ -75,7 +77,24 @@ public class EmployerManager implements EmployerService{
     	return userService.checkIfEmailExist(employer.getUser().getEmail());
     	
     }
+
+	@Override
+	public DataResult<Employer> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<Employer>(this.employerDao.findByUserId(id));
+	}
 	
+	
+	@Override
+	public DataResult<Employer> findByEmailAndPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		Optional<Employer> employer=this.employerDao.findByUser_EmailAndUser_Password(email, password);
+		if (employer.isPresent()) {
+			return new SuccessDataResult<Employer>(employer.get());
+		} else {
+			return new ErrorDataResult<Employer>("Bu email veya şifreye ait kullanıcı bulunamadı");
+		}
+	}
 	
 
 }

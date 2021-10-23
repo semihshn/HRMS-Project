@@ -16,4 +16,10 @@ public interface JobSeekerService extends BaseService<JobSeeker,Integer>{
 	
 	DataResult<List<JobSeekerCvDto>> getAllCvByJobSeeker_Id(int jobSeekerId);
 	
+	DataResult<JobSeeker> findByUserId(int id);
+	
+	DataResult<JobSeeker> getByUserId(int userId);
+	
+	DataResult<JobSeeker> findByEmailAndPassword(String email,String password);
+	
 }

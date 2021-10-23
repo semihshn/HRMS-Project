@@ -90,4 +90,15 @@ public class UserManager implements UserService{
 		return new SuccessDataResult<User>(user.get());
 	}
 
+	@Override
+	public DataResult<User> findByEmailAndPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		Optional<User> user=this.userDao.findByEmailAndPassword(email, password);
+		if (user.isPresent()) {
+			return new SuccessDataResult<User>(user.get());
+		} else {
+			return new ErrorDataResult<User>("Bu email veya şifreye ait kullanıcı bulunamadı");
+		}
+	}
+
 }
